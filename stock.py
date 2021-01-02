@@ -1,6 +1,6 @@
 import requests
 from datetime import date, timedelta
-from twilio.rest import Client
+from twilio.rest import TwilioRestClient
 import os
 
 STOCK_NAME = "FB"
@@ -53,8 +53,9 @@ for i,each_article in enumerate(articles):
     description.append(each_article['description'])
 
 print(titles)
-
-client = Client(os.environ['ACCOUNT_SID'], os.environ['ACCOUNT_AUTH'])
+print(os.environ['ACCOUNT_SID'])
+print(os.environ['ACCOUNT_AUTH'])
+client = TwilioRestClient(os.environ['ACCOUNT_SID'], os.environ['ACCOUNT_AUTH'])
 stock_stat = COMPANY_NAME+": "+sym+" "+str(round(diff_percent, 2))+"%"
 for i in range(0, 2):
     mess = "\n\n"+stock_stat+"\n\nClosing Price: "+str(round(float(yes_close), 2))+"\n\nHeadline: "+titles[i]+"\n\nDescription: "+description[i]
