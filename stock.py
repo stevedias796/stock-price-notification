@@ -21,7 +21,7 @@ def send_stock_sms(stk_name, company_name, email, mobile, message):
     data = myCollection.find_one({'symbol': STOCK_NAME, 'mobileNo': '+91'+mobile}, {'_id': 0})
     print(data)
     if data is not None:
-        message.append("You have already subscribed for stock - "+STOCK_NAME+", "+COMPANY_NAME)
+        message.append("You have already subscribed for stock "+STOCK_NAME+", "+COMPANY_NAME)
         return
     else:
         new_data = {
@@ -33,7 +33,7 @@ def send_stock_sms(stk_name, company_name, email, mobile, message):
 
         insert_data = myCollection.insert_one(new_data)
         if insert_data.inserted_id:
-            message.append('Thank you for registering, We will send you notification via SMS for '+ STOCK_NAME +' stock daily @8:00 AM.')
+            message.append('Thank you for registering, We will send you notification via SMS for '+ STOCK_NAME +' stock daily at 8 AM.')
             return
         else:
             message.append('Failed to Register! please try again!')
