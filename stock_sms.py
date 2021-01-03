@@ -76,7 +76,7 @@ for x in data:
     client = Client(os.environ['ACCOUNT_SID'], os.environ['ACCOUNT_AUTH'])
     stock_stat = COMPANY_NAME+": "+sym+" "+str(round(diff_percent, 2))+"%"
     for i in range(0, 1):
-        mess = "\n\n"+stock_stat+"\n\nLast Opening Price: "+str(round(float(yes_open), 2))+"\nLast Highest Price: "+str(round(float(yes_high), 2))+"\\nLast Lowest Price: "+str(round(float(yes_low), 2))+"\nLast Closing Price: "+str(round(float(yes_close), 2))+"\n\nHeadline: "+titles[i]+"\n\nDescription: "+description[i]
+        mess = "\n\n"+stock_stat+"\n\nLast Opening Price: "+str(round(float(yes_open), 2))+"\nLast Highest Price: "+str(round(float(yes_high), 2))+"\nLast Lowest Price: "+str(round(float(yes_low), 2))+"\nLast Closing Price: "+str(round(float(yes_close), 2))+"\n\nHeadline: "+titles[i]+"\n\nDescription: "+description[i]
         message = client.messages.create(
                  body=mess,
                  from_='+12562861254',
