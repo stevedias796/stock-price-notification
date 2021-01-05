@@ -68,9 +68,9 @@ for x in data:
     diff_percent = difference/float(yes_close) * 100
     print(diff_percent)
     if diff_percent < 0:
-        sym = 'down'
+        sym = 'DOWN'
     else:
-        sym = 'up'
+        sym = 'UP'
 
     new_param = {
         'qInTitle': COMPANY_NAME,
