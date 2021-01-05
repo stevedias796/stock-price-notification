@@ -30,17 +30,33 @@ for x in data:
 
     response = requests.get(STOCK_API_URL, stock_param)
     #print(response.json())
+    
+    if datetime.today().weekday() == 6:
+        # for sunday -2 days for previous price
+        day = 2
+        bf_day = 3
+    elif datetime.today().weekday() == 0:
+        # for monday -3 days for previous price
+        day = 3
+        bf_day = 4
+    elif datetime.today().weekday() == 1:
+        # for tuesday
+        day = 1
+        bf_day = 4
+    else:
+        day = 1
+        bf_day = 2
 
-    yesterday_date = (date.today()-timedelta(days=1)).isoformat()
-    dayBefore_yesterday_date = (date.today()-timedelta(days=2)).isoformat()
+    yesterday_date = (date.today() - timedelta(days=day)).isoformat()
+    dayBefore_yesterday_date = (date.today() - timedelta(days=bf_day)).isoformat()
 
-    yes_data = response.json()['Time Series (Daily)']['2020-12-31']
+    yes_data = response.json()['Time Series (Daily)'][yesterday_date]
     yes_close = yes_data['4. close']
     yes_open = yes_data['1. open']
     yes_high = yes_data['2. high']
     yes_low = yes_data['3. low']
     print(yes_close)
-    dayBefore_data = response.json()['Time Series (Daily)']['2020-12-30']
+    dayBefore_data = response.json()['Time Series (Daily)'][dayBefore_yesterday_date]
     dayBefore_close = dayBefore_data['4. close']
     dayBefore_open = dayBefore_data['1. open']
     dayBefore_high = dayBefore_data['2. high']
