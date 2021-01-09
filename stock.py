@@ -67,7 +67,7 @@ def submit():
         return render_template("stocks.html", message="")
 
     
-@app.route('/home')
+@app.route('/home', methods=['GET','POST'])
 def home():
     finGoal = myGoal.find()
     data = my_Collection.find()
@@ -128,6 +128,13 @@ def add_goal():
 def report():
     data = myOtherCollection.find()
     return render_template('/goalReport.html', data=data)
+
+
+@app.route('/new-goal/<float:amt>', methods=['GET','POST'])
+def new_goal(amt):
+    newvalues = {"$set": {"finalgoal": amt}}
+    myGoal.update_one({}, newvalues)
+    return redirect("/home")
 
 
 if __name__ == "__main__":
