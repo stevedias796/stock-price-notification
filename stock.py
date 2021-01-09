@@ -94,7 +94,9 @@ def add_goal():
         }
         insert_report = myOtherCollection.insert_one(report_data)
 
-        newach_goal = {"$set": {"acheivedgoal": new_amount}}
+        data = myGoal.find_one({}, {'_id': 0})
+        amount_new = float(data['acheivedgoal']) + amount
+        newach_goal = {"$set": {"acheivedgoal": amount_new}}
 
         myGoal.update_one({}, newach_goal)
 
